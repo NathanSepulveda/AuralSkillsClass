@@ -11,7 +11,7 @@
     <h1 style="text-align: center; font-family: Arial, Helvetica, sans-serif">
         Perdue AS I Final Exam Audio
     </h1>
-    <div style="position: fixed; left: 50%; top: 25%; transform: translate(-50%, -50%);">
+    <div id="player" style="position: fixed; left: 50%; top: 25%; transform: translate(-50%, -50%);">
       <button id="play" onclick="playSound()">Play</button>
       <span id="seek-obj-container">
         <progress id="seek-obj" value="0.0" max="1" style="width: 15em;"></progress>
@@ -35,6 +35,45 @@
   </body>
 
   <script>
+
+var callback = function(){
+  // Handler when the DOM is fully loaded
+  console.log("here")
+  var d = new Date("October 13, 2014 11:13:00");
+  var currentDate = new Date()
+  var hour = currentDate.getHours()
+  console.log(hour)
+  var date = currentDate.getDate()
+  let body = document.getElementById("player")
+//   if (date != 13) {
+//       console.log(hour)
+//       body.innerHTML = "Exam has not begun yet."
+
+    
+//   }
+
+  if ((hour < 9 || hour  > 16)) {
+        body.innerHTML = "Exam has not begun yet."
+      }
+    
+        if (date != 13) {
+      console.log(hour)
+      body.innerHTML = "Exam has not begun yet."
+
+    
+  }
+
+};
+
+if (
+    document.readyState === "complete" ||
+    (document.readyState !== "loading" && !document.documentElement.doScroll)
+) {
+  callback();
+} else {
+  document.addEventListener("DOMContentLoaded", callback);
+}
+
     let song =
     //   "https://firebasestorage.googleapis.com/v0/b/lesson-link.appspot.com/o/AS%20I%20S20%20Final%20Online%20Audio%20FIXED.mp3?alt=media&token=19d6c297-4dc5-4cbc-b216-fd85f1119b30";
     "https://firebasestorage.googleapis.com/v0/b/lesson-link.appspot.com/o/AS%20I%20F20%20Final%20Audio.mp3?alt=media&token=71a49adc-78d8-4a0b-b19a-669ceaea518f"
