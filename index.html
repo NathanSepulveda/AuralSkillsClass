@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Megan Test</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+      
+    <h1 style="text-align: center; font-family: Arial, Helvetica, sans-serif">
+        Perdue AS I Final Exam Audio
+    </h1>
+    <div style="position: fixed; left: 50%; top: 25%; transform: translate(-50%, -50%);">
+      <button id="play" onclick="playSound()">Play</button>
+      <span id="seek-obj-container">
+        <progress id="seek-obj" value="0.0" max="1" style="width: 15em;"></progress>
+        <div style="display: flex; justify-content: space-between;">
+            <p
+              id="demo"
+              style="text-align: center; font-family: Arial, Helvetica, sans-serif"
+            >
+              00:00
+            </p>
+            <p
+              style="text-align: center; font-family: Arial, Helvetica, sans-serif"
+            >
+              35:22
+            </p>
+          </div>
+      </span>
+      
+    </div>
+
+  </body>
+
+  <script>
+    let song =
+    //   "https://firebasestorage.googleapis.com/v0/b/lesson-link.appspot.com/o/AS%20I%20S20%20Final%20Online%20Audio%20FIXED.mp3?alt=media&token=19d6c297-4dc5-4cbc-b216-fd85f1119b30";
+    "https://firebasestorage.googleapis.com/v0/b/lesson-link.appspot.com/o/AS%20I%20F20%20Final%20Audio.mp3?alt=media&token=71a49adc-78d8-4a0b-b19a-669ceaea518f"
+    let isPlaying = false;
+
+    function timedText() {
+      setInterval(myTimeout1, 1000);
+    }
+    var time = 0;
+    var total = 2122;
+    function str_pad_left(string, pad, length) {
+      return (new Array(length + 1).join(pad) + string).slice(-length);
+    }
+    function myTimeout1() {
+      if (time < total) {
+        time += 1;
+        var minutes = Math.floor(time / 60);
+        var seconds = time - minutes * 60;
+        var finalTime =
+          str_pad_left(minutes, "0", 2) + ":" + str_pad_left(seconds, "0", 2);
+        document.getElementById("demo").innerHTML = finalTime;
+        document.getElementById("seek-obj").value = time / total;
+      } else {
+          clearInterval(timedText)
+      }
+    }
+    function playSound() {
+      var a = new Audio(song);
+      let playButton = document.getElementById("play");
+      if (!isPlaying) {
+        a.play();
+        isPlaying = true;
+        playButton.disabled = true;
+        timedText();
+      }
+    }
+  </script>
+</html>
